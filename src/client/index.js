@@ -1,14 +1,11 @@
 window.addEventListener("load", () => {
-	let sendButton = document.getElementsByClassName("sendButton")[0];
 	let valueTextarea = document.getElementsByClassName("valueTextarea")[0];
 	let resultTextarea = document.getElementsByClassName("resultTextarea")[0];
 	let preloader = document.getElementsByClassName("preloader")[0];
 
 	valueTextarea.focus();
 
-	sendButton.addEventListener("click", async () => {
-		preloader.classList.add("preloader__visible");
-
+	valueTextarea.addEventListener("input", async () => {
 		res = await fetch("/hash",
 		{
 			method: "POST",
@@ -23,8 +20,6 @@ window.addEventListener("load", () => {
 		}).then(res => res.json());
 
 		resultTextarea.value = res.hash;
-
-		preloader.classList.remove("preloader__visible");
 
 		valueTextarea.focus();
 	});
